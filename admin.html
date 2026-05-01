@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Message Dashboard</title>
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+    <style>
+        :root {
+            --bg:#050b18; --bg2:#0a1628; --bg3:#0d1b30;
+            --surface:rgba(255,255,255,0.04); --surface-hover:rgba(255,255,255,0.07);
+            --border:rgba(255,255,255,0.07); --border-light:rgba(255,255,255,0.12);
+            --accent:#00c9ff; --accent2:#0072ff; --accent-glow:rgba(0,201,255,0.18);
+            --text:#e2e8f0; --text-muted:#718096; --text-dim:#4a5568;
+            --success:#48bb78; --error:#fc8181; --warning:#ecc94b;
+            --radius:12px; --radius-sm:8px;
+            --font-display:'Syne',sans-serif; --font-body:'Poppins',sans-serif;
+        }
+        *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+        html,body{height:100%;overflow:hidden;}
+        body{background:var(--bg);color:var(--text);font-family:var(--font-body);font-weight:300;font-size:14px;}
+        a{text-decoration:none;color:inherit;}
+        button{cursor:pointer;font-family:var(--font-body);}
+        ::-webkit-scrollbar{width:6px;}
+        ::-webkit-scrollbar-track{background:transparent;}
+        ::-webkit-scrollbar-thumb{background:rgba(255,255,255,0.1);border-radius:3px;}
+        ::-webkit-scrollbar-thumb:hover{background:rgba(255,255,255,0.2);}
+
+        /* ── APP SHELL ── */
+        .app{display:flex;height:100vh;width:100vw;}
+
+        /* ── SIDEBAR ── */
+        .sidebar{width:220px;background:var(--bg2);border-right:1px solid var(--border);display:flex;flex-direction:column;flex-shrink:0;}
+        .sidebar-brand{padding:24px 20px 20px;display:flex;align-items:center;gap:10px;border-bottom:1px solid var(--border);}
+        .sidebar-brand .logo-icon{width:36px;height:36px;border-radius:10px;background:linear-gradient(135deg,var(--accent),var(--accent2));display:flex;align-items:center;justify-content:center;font-size:1rem;color:#fff;}
+        .sidebar-brand h2{font-family:var(--font-display);font-size:1rem;font-weight:700;}
+        .sidebar-brand h2 span{color:var(--accent);}
+
+        .sidebar-nav{flex:1;padding:16px 10px;display:flex;flex-direction:column;gap:4px;}
+        .nav-item{display:flex;align-items:center;gap:12px;padding:10px 14px;border-radius:var(--radius-sm);font-size:0.82rem;font-weight:400;color:var(--text-muted);transition:all 0.2s;border:none;background:none;width:100%;text-align:left;}
+        .nav-item:hover{background:var(--surface-hover);color:var(--text);}
+        .nav-item.active{background:var(--accent-glow);color:var(--accent);font-weight:500;}
+        .nav-item i{width:18px;text-align:center;font-size:0.9rem;}
+        .nav-badge{margin-left:auto;background:var(--accent);color:#000;font-size:0.65rem;font-weight:700;padding:2px 7px;border-radius:10px;min-width:20px;text-align:center;}
+        .nav-badge.zero{background:var(--text-dim);color:var(--bg);}
+
+        .sidebar-footer{padding:14px;border-top:1px solid var(--border);}
+        .sidebar-footer a{display:flex;align-items:center;gap:8px;font-size:0.78rem;color:var(--text-dim);padding:8px 10px;border-radius:var(--radius-sm);transition:all 0.2s;}
+        .sidebar-footer a:hover{color:var(--accent);background:var(--surface-hover);}
+
+        /* ── MESSAGE LIST PANEL ── */
+        .list-panel{width:340px;border-right:1px solid var(--border);display:flex;flex-direction:column;flex-shrink:0;background:var(--bg);}
+        .list-header{padding:16px 18px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;gap:8px;}
+        .list-header h3{font-family:var(--font-display);font-size:0.95rem;font-weight:600;}
+        .list-toolbar{display:flex;gap:6px;}
+        .toolbar-btn{width:32px;height:32px;border-radius:var(--radius-sm);border:1px solid var(--border);background:transparent;color:var(--text-muted);display:flex;align-items:center;justify-content:center;font-size:0.75rem;transition:all 0.2s;}
+        .toolbar-btn:hover{border-color:var(--accent);color:var(--accent);background:var(--accent-glow);}
+        .toolbar-btn.danger:hover{border-color:var(--error);color:var(--error);background:rgba(252,129,129,0.1);}
+
+        .search-box{margin:0 14px 10px;position:relative;}
+        .search-box input{width:100%;padding:9px 12px 9px 34px;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-sm);color:var(--text);font-size:0.8rem;outline:none;transition:border 0.2s;}
+        .search-box input:focus{border-color:var(--accent);}
+        .search-box i{position:absolute;left:12px;top:50%;transform:translateY(-50%);color:var(--text-dim);font-size:0.75rem;}
+
+        .msg-list{flex:1;overflow-y:auto;padding:4px 8px;}
+        .msg-item{display:flex;align-items:flex-start;gap:12px;padding:14px 12px;border-radius:var(--radius-sm);margin-bottom:2px;transition:all 0.2s;cursor:pointer;position:relative;}
+        .msg-item:hover{background:var(--surface-hover);}
+        .msg-item.active{background:var(--accent-glow);border:1px solid rgba(0,201,255,0.15);}
+        .msg-item.unread::before{content:'';position:absolute;left:4px;top:50%;transform:translateY(-50%);width:6px;height:6px;background:var(--accent);border-radius:50%;}
+        .msg-item.unread .mi-name{color:var(--text);font-weight:600;}
+        .mi-avatar{width:38px;height:38px;border-radius:50%;background:linear-gradient(135deg,var(--accent),var(--accent2));display:flex;align-items:center;justify-content:center;font-family:var(--font-display);font-weight:700;font-size:0.8rem;color:#fff;flex-shrink:0;}
+        .mi-content{flex:1;min-width:0;}
+        .mi-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:2px;}
+        .mi-name{font-size:0.82rem;font-weight:500;color:var(--text-muted);}
+        .mi-time{font-size:0.65rem;color:var(--text-dim);}
+        .mi-subject{font-size:0.78rem;color:var(--text-muted);margin-bottom:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+        .mi-preview{font-size:0.72rem;color:var(--text-dim);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+
+        .list-empty{text-align:center;padding:60px 20px;color:var(--text-dim);}
+        .list-empty i{font-size:2.5rem;margin-bottom:12px;display:block;}
+        .list-empty p{font-size:0.82rem;}
+
+        /* ── READING PANE ── */
+        .reading-pane{flex:1;display:flex;flex-direction:column;background:var(--bg);overflow:hidden;}
+
+        .read-empty{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;color:var(--text-dim);gap:12px;}
+        .read-empty i{font-size:3.5rem;opacity:0.3;}
+        .read-empty p{font-size:0.85rem;}
+
+        .read-header{padding:20px 28px;border-bottom:1px solid var(--border);display:flex;align-items:flex-start;justify-content:space-between;gap:16px;}
+        .read-subject{font-family:var(--font-display);font-size:1.2rem;font-weight:700;line-height:1.3;}
+        .read-actions{display:flex;gap:8px;flex-shrink:0;}
+        .action-btn{padding:8px 16px;border-radius:50px;border:1px solid var(--border);background:transparent;color:var(--text-muted);font-size:0.75rem;font-weight:500;display:inline-flex;align-items:center;gap:6px;transition:all 0.2s;}
+        .action-btn:hover{border-color:var(--accent);color:var(--accent);background:var(--accent-glow);}
+        .action-btn.reply-btn{border-color:var(--accent);color:var(--accent);}
+        .action-btn.reply-btn:hover{background:var(--accent);color:#fff;}
+        .action-btn.del-btn:hover{border-color:var(--error);color:var(--error);background:rgba(252,129,129,0.08);}
+
+        .read-meta{padding:18px 28px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:16px;}
+        .read-avatar{width:44px;height:44px;border-radius:50%;background:linear-gradient(135deg,var(--accent),var(--accent2));display:flex;align-items:center;justify-content:center;font-family:var(--font-display);font-weight:700;font-size:1rem;color:#fff;flex-shrink:0;}
+        .read-sender{flex:1;}
+        .read-sender strong{display:block;font-size:0.9rem;font-weight:600;}
+        .read-sender span{font-size:0.78rem;color:var(--text-muted);}
+        .read-date{font-size:0.72rem;color:var(--text-dim);text-align:right;line-height:1.5;}
+
+        .read-body{flex:1;overflow-y:auto;padding:28px;line-height:1.9;font-size:0.9rem;white-space:pre-wrap;color:var(--text);}
+
+        /* ── RESPONSIVE ── */
+        @media(max-width:900px){
+            .sidebar{width:60px;} .sidebar-brand h2,.nav-item span,.nav-badge,.sidebar-footer span{display:none;}
+            .sidebar-brand{padding:16px 12px;justify-content:center;} .nav-item{justify-content:center;padding:12px;}
+            .list-panel{width:280px;}
+        }
+        @media(max-width:600px){
+            .sidebar{display:none;} .list-panel{width:100%;}
+            .reading-pane{display:none;} .reading-pane.mobile-show{display:flex;position:fixed;inset:0;z-index:100;width:100%;}
+        }
+    </style>
+</head>
+<body>
+<div class="app">
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+        <div class="sidebar-brand">
+            <div class="logo-icon"><i class="fas fa-envelope-open-text"></i></div>
+            <h2>Mail<span>Box</span></h2>
+        </div>
+        <nav class="sidebar-nav">
+            <button class="nav-item active" data-filter="all" onclick="setFilter('all',this)">
+                <i class="fas fa-inbox"></i><span>All Mail</span>
+                <span class="nav-badge" id="badgeAll">0</span>
+            </button>
+            <button class="nav-item" data-filter="unread" onclick="setFilter('unread',this)">
+                <i class="fas fa-envelope"></i><span>Unread</span>
+                <span class="nav-badge" id="badgeUnread">0</span>
+            </button>
+            <button class="nav-item" data-filter="read" onclick="setFilter('read',this)">
+                <i class="fas fa-envelope-open"></i><span>Read</span>
+                <span class="nav-badge zero" id="badgeRead">0</span>
+            </button>
+        </nav>
+        <div class="sidebar-footer">
+            <a href="index.html"><i class="fas fa-globe"></i><span>Back to Portfolio</span></a>
+        </div>
+    </aside>
+
+    <!-- MESSAGE LIST -->
+    <section class="list-panel">
+        <div class="list-header">
+            <h3 id="listTitle">All Mail</h3>
+            <div class="list-toolbar">
+                <button class="toolbar-btn" title="Refresh" onclick="loadMessages()"><i class="fas fa-sync-alt"></i></button>
+                <button class="toolbar-btn" title="Mark all read" onclick="markAllRead()"><i class="fas fa-check-double"></i></button>
+                <button class="toolbar-btn danger" title="Delete all" onclick="deleteAll()"><i class="fas fa-trash-alt"></i></button>
+            </div>
+        </div>
+        <div class="search-box">
+            <i class="fas fa-search"></i>
+            <input type="text" id="searchInput" placeholder="Search messages..." oninput="renderList()">
+        </div>
+        <div class="msg-list" id="msgList">
+            <div class="list-empty"><i class="fas fa-spinner fa-spin"></i><p>Loading...</p></div>
+        </div>
+    </section>
+
+    <!-- READING PANE -->
+    <main class="reading-pane" id="readingPane">
+        <div class="read-empty" id="readEmpty">
+            <i class="fas fa-envelope-open-text"></i>
+            <p>Select a message to read</p>
+        </div>
+        <div id="readContent" style="display:none;flex-direction:column;height:100%;">
+            <div class="read-header">
+                <div class="read-subject" id="readSubject"></div>
+                <div class="read-actions">
+                    <button class="action-btn reply-btn" id="btnReply"><i class="fas fa-reply"></i> Reply</button>
+                    <button class="action-btn del-btn" id="btnDel"><i class="fas fa-trash"></i> Delete</button>
+                </div>
+            </div>
+            <div class="read-meta">
+                <div class="read-avatar" id="readAvatar"></div>
+                <div class="read-sender">
+                    <strong id="readName"></strong>
+                    <span id="readEmail"></span>
+                </div>
+                <div class="read-date" id="readDate"></div>
+            </div>
+            <div class="read-body" id="readBody"></div>
+        </div>
+    </main>
+</div>
+
+<script>
+const API = '/api/contact';
+let allMessages = [];
+let currentFilter = 'all';
+let selectedId = null;
+
+function initials(n){ return n.split(' ').map(w=>w[0]).join('').toUpperCase().slice(0,2); }
+function fmtTime(iso){
+    const d=new Date(iso), now=new Date(), diff=now-d;
+    if(diff<60000) return 'Now';
+    if(diff<3600000) return Math.floor(diff/60000)+'m';
+    if(diff<86400000) return Math.floor(diff/3600000)+'h';
+    if(diff<604800000) return Math.floor(diff/86400000)+'d';
+    return d.toLocaleDateString('en-IN',{day:'numeric',month:'short'});
+}
+function fmtFull(iso){ return new Date(iso).toLocaleString('en-IN',{weekday:'short',day:'numeric',month:'long',year:'numeric',hour:'2-digit',minute:'2-digit'}); }
+
+// Load
+async function loadMessages(){
+    try{
+        const res=await fetch(API); const json=await res.json();
+        if(json.success){ allMessages=json.data; updateBadges(); renderList(); }
+    }catch(e){
+        document.getElementById('msgList').innerHTML='<div class="list-empty"><i class="fas fa-exclamation-triangle"></i><p>Server offline. Run: node server.js</p></div>';
+    }
+}
+
+// Badges
+function updateBadges(){
+    const total=allMessages.length, unread=allMessages.filter(m=>!m.isRead).length;
+    document.getElementById('badgeAll').textContent=total;
+    document.getElementById('badgeUnread').textContent=unread;
+    document.getElementById('badgeRead').textContent=total-unread;
+    document.getElementById('badgeUnread').classList.toggle('zero',unread===0);
+}
+
+// Filter + search
+function getFiltered(){
+    const q=document.getElementById('searchInput').value.toLowerCase();
+    return allMessages.filter(m=>{
+        if(currentFilter==='unread' && m.isRead) return false;
+        if(currentFilter==='read' && !m.isRead) return false;
+        if(q && !m.name.toLowerCase().includes(q) && !m.subject.toLowerCase().includes(q) && !m.message.toLowerCase().includes(q) && !m.email.toLowerCase().includes(q)) return false;
+        return true;
+    });
+}
+
+function setFilter(f,btn){
+    currentFilter=f;
+    document.querySelectorAll('.nav-item').forEach(n=>n.classList.remove('active'));
+    btn.classList.add('active');
+    document.getElementById('listTitle').textContent=btn.querySelector('span')?.textContent||f;
+    renderList();
+}
+
+// Render list
+function renderList(){
+    const list=getFiltered(), container=document.getElementById('msgList');
+    if(!list.length){
+        container.innerHTML='<div class="list-empty"><i class="fas fa-inbox"></i><p>No messages</p></div>';
+        return;
+    }
+    container.innerHTML=list.map(m=>`
+        <div class="msg-item ${m.isRead?'':'unread'} ${m._id===selectedId?'active':''}" onclick="selectMsg('${m._id}')">
+            <div class="mi-avatar">${initials(m.name)}</div>
+            <div class="mi-content">
+                <div class="mi-top"><span class="mi-name">${m.name}</span><span class="mi-time">${fmtTime(m.createdAt)}</span></div>
+                <div class="mi-subject">${m.subject||'No Subject'}</div>
+                <div class="mi-preview">${m.message}</div>
+            </div>
+        </div>`).join('');
+}
+
+// Select message
+async function selectMsg(id){
+    selectedId=id;
+    const m=allMessages.find(x=>x._id===id);
+    if(!m) return;
+
+    document.getElementById('readEmpty').style.display='none';
+    const rc=document.getElementById('readContent');
+    rc.style.display='flex';
+    document.getElementById('readSubject').textContent=m.subject||'No Subject';
+    document.getElementById('readAvatar').textContent=initials(m.name);
+    document.getElementById('readName').textContent=m.name;
+    document.getElementById('readEmail').textContent=m.email;
+    document.getElementById('readDate').innerHTML=fmtFull(m.createdAt);
+    document.getElementById('readBody').textContent=m.message;
+
+    // Mobile: show reading pane
+    document.getElementById('readingPane').classList.add('mobile-show');
+
+    // Mark read
+    if(!m.isRead){
+        try{ await fetch(`${API}/${id}`,{method:'PATCH'}); m.isRead=true; updateBadges(); }catch(e){}
+    }
+    renderList();
+}
+
+// Reply
+document.getElementById('btnReply').onclick=()=>{
+    const m=allMessages.find(x=>x._id===selectedId);
+    if(m) window.open(`mailto:${m.email}?subject=Re: ${encodeURIComponent(m.subject||'Your Message')}`);
+};
+
+// Delete single
+document.getElementById('btnDel').onclick=async()=>{
+    if(!selectedId||!confirm('Delete this message?')) return;
+    try{
+        await fetch(`${API}/${selectedId}`,{method:'DELETE'});
+        allMessages=allMessages.filter(m=>m._id!==selectedId);
+        selectedId=null;
+        document.getElementById('readContent').style.display='none';
+        document.getElementById('readEmpty').style.display='flex';
+        updateBadges(); renderList();
+    }catch(e){alert('Failed to delete.');}
+};
+
+// Mark all read
+async function markAllRead(){
+    const unread=allMessages.filter(m=>!m.isRead);
+    if(!unread.length) return;
+    try{
+        await Promise.all(unread.map(m=>fetch(`${API}/${m._id}`,{method:'PATCH'})));
+        unread.forEach(m=>m.isRead=true);
+        updateBadges(); renderList();
+    }catch(e){alert('Failed.');}
+}
+
+// Delete all
+async function deleteAll(){
+    if(!allMessages.length){alert('No messages to delete.');return;}
+    if(!confirm(`Delete ALL ${allMessages.length} message(s)? This cannot be undone!`)) return;
+    try{
+        const res=await fetch(`${API}/all`,{method:'DELETE'});
+        const data=await res.json();
+        if(data.success){
+            allMessages=[];selectedId=null;
+            document.getElementById('readContent').style.display='none';
+            document.getElementById('readEmpty').style.display='flex';
+            updateBadges(); renderList();
+        }else{alert(data.message||'Failed.');}
+    }catch(e){alert('Failed. Check server.');}
+}
+
+// Keyboard: Escape to deselect on mobile
+document.addEventListener('keydown',e=>{
+    if(e.key==='Escape'){
+        document.getElementById('readingPane').classList.remove('mobile-show');
+    }
+});
+
+loadMessages();
+</script>
+</body>
+</html>

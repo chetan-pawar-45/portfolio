@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description"
+        content="Chetan Pawar — Web Developer & Designer based in India. Building beautiful, fast digital experiences." />
+    <meta name="keywords"
+        content="Chetan Pawar, web developer, designer, portfolio, India, frontend, HTML, CSS, JavaScript, React" />
+    <meta name="author" content="Chetan Pawar" />
+    <meta property="og:title" content="Chetan Pawar — Web Developer" />
+    <meta property="og:description"
+        content="Personal portfolio of Chetan Pawar, Web Developer & Designer from India." />
+    <meta property="og:type" content="website" />
+    <title>Chetan Pawar — Web Developer & Designer</title>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Poppins:wght@300;400;500;600&display=swap"
+        rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+    <link rel="stylesheet" href="style.css" />
+
+</head>
+
+<body>
+
+    <!-- THREE.JS background -->
+    <canvas id="bgCanvas"></canvas>
+
+    <!-- Particle canvas -->
+    <canvas id="particleCanvas"></canvas>
+
+    <!-- Custom cursor - must be last child of body for highest stacking -->
+    <canvas id="cursorCanvas" width="1" height="1"></canvas>
+
+    <!-- Grid bg & orbs -->
+    <div class="hero-grid-bg"></div>
+    <div class="orb orb1"></div>
+    <div class="orb orb2"></div>
+    <div class="orb orb3"></div>
+
+    <!-- ══ NAVBAR ══ -->
+    <nav id="navbar">
+        <div class="nav-inner">
+            <a href="#home" class="logo">CH<span>.</span></a>
+            <button class="hamburger" id="hamburger" aria-label="Open menu">
+                <span></span><span></span><span></span>
+            </button>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#experience">Experience</a></li>
+                <li><a href="#education">Education</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- ══ 01. HERO ══ -->
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <p class="hero-greeting">👋 Hello, I'm</p>
+            <h1 class="hero-name">
+                <span class="name-line glitch" data-text="Chetan">Chetan</span>
+                <span class="name-line accent-line">Pawar</span>
+            </h1>
+            <p class="hero-role">
+                <span class="role-text" id="roleText"></span><span class="cursor-blink">|</span>
+            </p>
+            <p class="hero-tagline">
+                Crafting beautiful digital experiences from <strong>India 🇮🇳</strong> — one pixel at a time.
+            </p>
+            <div class="hero-btns">
+                <a href="#projects" class="btn-primary magnetic-wrap"> View My Work <i
+                        class="fas fa-arrow-right"></i></a>
+                <a href="reasum.pdf" download class="btn-outline magnetic-wrap"><i class="fas fa-download"></i> Download
+                    CV</a>
+            </div>
+            <div class="hero-socials">
+                <a href="https://github.com/" target="_blank" aria-label="GitHub"><i class="fab fa-github"></i></a>
+                <a href="https://linkedin.com/" target="_blank" aria-label="LinkedIn"><i
+                        class="fab fa-linkedin"></i></a>
+                <a href="https://twitter.com/" target="_blank" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                <a href="mailto:chetanpawar0780@gmail.com" aria-label="Email"><i class="fas fa-envelope"></i></a>
+            </div>
+        </div>
+
+        <!-- Profile card with 3D tilt -->
+        <div class="hero-visual" id="heroVisual">
+            <div class="float-chip chip1">⚡ React.js</div>
+            <div class="float-chip chip2">🎨 UI/UX</div>
+            <div class="float-chip chip3">🚀 Node.js</div>
+            <div class="profile-card glass" id="profileCard">
+                <div class="profile-avatar">
+                    <div class="avatar-ring"></div>
+                    <div class="avatar-img">CP</div>
+                </div>
+                <h3>Chetan Pawar</h3>
+                <p>Web Developer & Designer</p>
+                <div class="profile-stats">
+                    <div class="pstat"><strong>10+</strong><span>Projects</span></div>
+                    <div class="pstat"><strong>5+</strong><span>Clients</span></div>
+                    <div class="pstat"><strong>2+</strong><span>Yrs Exp</span></div>
+                </div>
+                <div class="profile-badge">
+                    <span class="badge-dot"></span> Available for work
+                </div>
+            </div>
+        </div>
+
+        <div class="scroll-indicator">
+            <div class="scroll-mouse">
+                <div class="scroll-wheel"></div>
+            </div>
+            <span>Scroll down</span>
+        </div>
+    </section>
+
+    <!-- ══ 02. ABOUT ══ -->
+    <section id="about" class="about section">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">02. About</span>
+                <h2>Who I <span class="accent">Am</span></h2>
+                <p class="section-sub">A little bit about myself</p>
+            </div>
+            <div class="about-grid">
+                <div class="about-text reveal">
+                    <p>Hi! I'm <strong>Chetan</strong>, a passionate <strong>Web Developer & Designer</strong> based in
+                        <strong>India 🇮🇳</strong>. I love building fast, responsive, and visually stunning web
+                        experiences that make users go "wow".
+                    </p>
+                    <p>I'm currently pursuing my <strong>B.Tech in Computer Engineering</strong> and sharpening my
+                        skills in full-stack development with React, Node.js, and modern frameworks. I've built
+                        real-world projects including e-commerce platforms, calculators, and Amazon-style clones.</p>
+                    <p>When I'm not coding, I enjoy learning new technologies, contributing to open-source, and dreaming
+                        up my next big project. 🚀</p>
+                    <div class="about-info">
+                        <div class="info-item"><i class="fas fa-map-marker-alt"></i><span>Malegaon, Maharashtra,
+                                India</span></div>
+                        <div class="info-item"><i class="fas fa-envelope"></i><span>chetanpawar0780@gmail.com</span>
+                        </div>
+                        <div class="info-item"><i class="fas fa-graduation-cap"></i><span>B.Tech Computer Engineering —
+                                2nd Year</span></div>
+                        <div class="info-item"><i class="fas fa-code"></i><span>Open to Opportunities</span></div>
+                    </div>
+                    <a href="reasum.pdf" download class="btn-primary">Download Resume <i
+                            class="fas fa-download"></i></a>
+                </div>
+                <div class="about-interests reveal">
+                    <h3>My Interests</h3>
+                    <div class="interest-cards">
+                        <div class="interest-card glass"><i class="fas fa-laptop-code"></i><span>Web Development</span>
+                        </div>
+                        <div class="interest-card glass"><i class="fas fa-paint-brush"></i><span>UI/UX Design</span>
+                        </div>
+                        <div class="interest-card glass"><i class="fas fa-mobile-alt"></i><span>Responsive Design</span>
+                        </div>
+                        <div class="interest-card glass"><i class="fas fa-database"></i><span>Backend Dev</span></div>
+                        <div class="interest-card glass"><i class="fab fa-git-alt"></i><span>Open Source</span></div>
+                        <div class="interest-card glass"><i class="fas fa-rocket"></i><span>Performance</span></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ══ 03. SKILLS ══ -->
+    <section id="skills" class="skills section">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">03. Skills</span>
+                <h2>What I <span class="accent">Know</span></h2>
+                <p class="section-sub">Technologies & tools I work with</p>
+            </div>
+            <div class="skills-wrapper">
+                <div class="skills-bars reveal">
+                    <h3>Technical Skills</h3>
+                    <div class="skill-bar-item">
+                        <div class="skill-info"><span>HTML / CSS</span><span class="pct-label">90%</span></div>
+                        <div class="skill-track">
+                            <div class="skill-fill" style="--pct:90%"></div>
+                        </div>
+                    </div>
+                    <div class="skill-bar-item">
+                        <div class="skill-info"><span>JavaScript</span><span class="pct-label">80%</span></div>
+                        <div class="skill-track">
+                            <div class="skill-fill" style="--pct:80%"></div>
+                        </div>
+                    </div>
+                    <div class="skill-bar-item">
+                        <div class="skill-info"><span>React.js</span><span class="pct-label">70%</span></div>
+                        <div class="skill-track">
+                            <div class="skill-fill" style="--pct:70%"></div>
+                        </div>
+                    </div>
+                    <div class="skill-bar-item">
+                        <div class="skill-info"><span>Node.js</span><span class="pct-label">65%</span></div>
+                        <div class="skill-track">
+                            <div class="skill-fill" style="--pct:65%"></div>
+                        </div>
+                    </div>
+                    <div class="skill-bar-item">
+                        <div class="skill-info"><span>Git & GitHub</span><span class="pct-label">85%</span></div>
+                        <div class="skill-track">
+                            <div class="skill-fill" style="--pct:85%"></div>
+                        </div>
+                    </div>
+                    <div class="skill-bar-item">
+                        <div class="skill-info"><span>MySQL / MongoDB</span><span class="pct-label">60%</span></div>
+                        <div class="skill-track">
+                            <div class="skill-fill" style="--pct:60%"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="tech-icons reveal">
+                    <h3>Tech Stack</h3>
+                    <div class="icon-grid">
+                        <div class="tech-icon-card glass"><i class="fab fa-html5"></i><span>HTML5</span></div>
+                        <div class="tech-icon-card glass"><i class="fab fa-css3-alt"></i><span>CSS3</span></div>
+                        <div class="tech-icon-card glass"><i class="fab fa-js-square"></i><span>JavaScript</span></div>
+                        <div class="tech-icon-card glass"><i class="fab fa-react"></i><span>React</span></div>
+                        <div class="tech-icon-card glass"><i class="fab fa-node-js"></i><span>Node.js</span></div>
+                        <div class="tech-icon-card glass"><i class="fab fa-python"></i><span>Python</span></div>
+                        <div class="tech-icon-card glass"><i class="fab fa-git-alt"></i><span>Git</span></div>
+                        <div class="tech-icon-card glass"><i class="fab fa-github"></i><span>GitHub</span></div>
+                        <div class="tech-icon-card glass"><i class="fab fa-figma"></i><span>Figma</span></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ══ 04. PROJECTS ══ -->
+    <section id="projects" class="projects section">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">04. Projects</span>
+                <h2>What I've <span class="accent">Built</span></h2>
+                <p class="section-sub">A selection of my recent work</p>
+            </div>
+            <div class="projects-grid">
+                <div class="project-card glass reveal">
+                    <div class="project-header">
+                        <div class="project-icon"><i class="fas fa-shopping-cart"></i></div>
+                        <div class="project-links">
+                            <a href="#" title="GitHub"><i class="fab fa-github"></i></a>
+                            <a href="#" title="Live Demo"><i class="fas fa-external-link-alt"></i></a>
+                        </div>
+                    </div>
+                    <div class="project-tag-row">
+                        <span class="ptag">HTML</span><span class="ptag">CSS</span><span class="ptag">JavaScript</span>
+                    </div>
+                    <h3>E-Commerce Website</h3>
+                    <p>A fully responsive e-commerce platform with product listings, shopping cart, wishlist, and smooth
+                        checkout experience. Features real-time search and filter.</p>
+                    <div class="project-footer">
+                        <span class="project-status live"><span class="dot"></span>Live</span>
+                    </div>
+                </div>
+                <div class="project-card glass reveal">
+                    <div class="project-header">
+                        <div class="project-icon"><i class="fas fa-calculator"></i></div>
+                        <div class="project-links">
+                            <a href="#" title="GitHub"><i class="fab fa-github"></i></a>
+                            <a href="#" title="Live Demo"><i class="fas fa-external-link-alt"></i></a>
+                        </div>
+                    </div>
+                    <div class="project-tag-row">
+                        <span class="ptag">HTML</span><span class="ptag">CSS</span><span class="ptag">JavaScript</span>
+                    </div>
+                    <h3>Calculator App</h3>
+                    <p>A sleek, interactive calculator with keyboard support, calculation history log, dark/light mode
+                        toggle, and smooth UI animations built in pure vanilla JS.</p>
+                    <div class="project-footer">
+                        <span class="project-status live"><span class="dot"></span>Live</span>
+                    </div>
+                </div>
+                <div class="project-card glass reveal">
+                    <div class="project-header">
+                        <div class="project-icon"><i class="fab fa-amazon"></i></div>
+                        <div class="project-links">
+                            <a href="#" title="GitHub"><i class="fab fa-github"></i></a>
+                            <a href="#" title="Live Demo"><i class="fas fa-external-link-alt"></i></a>
+                        </div>
+                    </div>
+                    <div class="project-tag-row">
+                        <span class="ptag">React</span><span class="ptag">Firebase</span><span class="ptag">CSS</span>
+                    </div>
+                    <h3>Amazon Clone</h3>
+                    <p>A pixel-perfect Amazon clone with product pages, search functionality, cart system, and Firebase
+                        authentication for a real-world shopping experience.</p>
+                    <div class="project-footer">
+                        <span class="project-status wip"><span class="dot"></span>In Progress</span>
+                    </div>
+                </div>
+            </div>
+            <div class="projects-cta">
+                <a href="https://github.com/" target="_blank" class="btn-outline">
+                    <i class="fab fa-github"></i> View All on GitHub
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ══ 05. EXPERIENCE ══ -->
+    <section id="experience" class="experience section">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">05. Experience</span>
+                <h2>My <span class="accent">Journey</span></h2>
+                <p class="section-sub">Work experience timeline</p>
+            </div>
+            <div class="timeline">
+                <div class="timeline-item reveal">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-card glass">
+                        <div class="timeline-header">
+                            <div>
+                                <h3>Web Developer (Freelance)</h3>
+                                <p class="timeline-place"><i class="fas fa-briefcase"></i> Self-Employed, India</p>
+                            </div>
+                            <span class="timeline-date">2023 – Present</span>
+                        </div>
+                        <p>Building responsive websites and web apps for local clients. Delivered e-commerce sites,
+                            landing pages, and dashboards using HTML, CSS, JavaScript, and React.</p>
+                        <div class="timeline-tags">
+                            <span>React</span><span>HTML/CSS</span><span>JavaScript</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="timeline-item reveal">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-card glass">
+                        <div class="timeline-header">
+                            <div>
+                                <h3>Frontend Intern</h3>
+                                <p class="timeline-place"><i class="fas fa-building"></i> Tech Startup, Maharashtra</p>
+                            </div>
+                            <span class="timeline-date">2022 – 2023</span>
+                        </div>
+                        <p>Assisted in building responsive UI components, fixing cross-browser issues, and optimizing
+                            page performance for a SaaS product serving 500+ users.</p>
+                        <div class="timeline-tags">
+                            <span>HTML</span><span>CSS</span><span>Git</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="resume-cta reveal">
+                <p>Want the full picture?</p>
+                <a href="reasum.pdf" download class="btn-primary"><i class="fas fa-download"></i> Download Full
+                    Resume</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ══ 06. EDUCATION ══ -->
+    <section id="education" class="education section">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">06. Education</span>
+                <h2>My Education <span class="accent">Journey</span></h2>
+                <p class="section-sub">Academic path that shaped my technical foundation</p>
+            </div>
+            <div class="edu-timeline">
+                <div class="edu-item reveal edu-left">
+                    <div class="edu-connector">
+                        <div class="edu-dot edu-dot--active"><i class="fas fa-graduation-cap"></i></div>
+                    </div>
+                    <div class="edu-card glass edu-card--active">
+                        <div class="edu-card-inner">
+                            <div class="edu-header">
+                                <div class="edu-icon-wrap edu-icon--blue"><i class="fas fa-university"></i></div>
+                                <div class="edu-meta">
+                                    <span class="edu-badge ongoing"><span class="badge-pulse"></span>Ongoing</span>
+                                    <span class="edu-year">2023 – Present</span>
+                                </div>
+                            </div>
+                            <h3 class="edu-degree">B.Tech in Computer Engineering</h3>
+                            <p class="edu-institute"><i class="fas fa-map-marker-alt"></i> Currently Pursuing — Second
+                                Year</p>
+                            <p class="edu-desc">Actively learning advanced concepts in computer engineering, including
+                                data structures, algorithms, operating systems, and modern software development
+                                methodologies. Building real-world projects and growing as a full-stack developer.</p>
+                            <div class="edu-skills">
+                                <span>Data Structures</span><span>Algorithms</span><span>OS
+                                    Concepts</span><span>Software Engineering</span><span>DBMS</span>
+                            </div>
+                        </div>
+                        <div class="edu-glow"></div>
+                    </div>
+                </div>
+                <div class="edu-item reveal edu-right">
+                    <div class="edu-connector">
+                        <div class="edu-dot"><i class="fas fa-award"></i></div>
+                    </div>
+                    <div class="edu-card glass">
+                        <div class="edu-card-inner">
+                            <div class="edu-header">
+                                <div class="edu-icon-wrap edu-icon--cyan"><i class="fas fa-scroll"></i></div>
+                                <div class="edu-meta">
+                                    <span class="edu-badge completed"><i class="fas fa-check-circle"></i>
+                                        Completed</span>
+                                    <span class="edu-year">2020 – 2023</span>
+                                </div>
+                            </div>
+                            <h3 class="edu-degree">Diploma in Computer Science</h3>
+                            <p class="edu-institute"><i class="fas fa-building"></i> Indo German Tool Room, Indore</p>
+                            <p class="edu-desc">Completed a three-year diploma with strong fundamentals in programming,
+                                software development, and practical technical skills. Gained hands-on experience in C,
+                                C++, web technologies, and database management systems.</p>
+                            <div class="edu-skills">
+                                <span>C / C++</span><span>Web
+                                    Basics</span><span>Database</span><span>Networking</span><span>Linux</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="edu-stats reveal">
+                <div class="edu-stat-card glass">
+                    <div class="edu-stat-icon"><i class="fas fa-book-open"></i></div>
+                    <div><strong>4+</strong><span>Years of Study</span></div>
+                </div>
+                <div class="edu-stat-card glass">
+                    <div class="edu-stat-icon"><i class="fas fa-certificate"></i></div>
+                    <div><strong>1</strong><span>Diploma Earned</span></div>
+                </div>
+                <div class="edu-stat-card glass">
+                    <div class="edu-stat-icon"><i class="fas fa-code"></i></div>
+                    <div><strong>10+</strong><span>Projects Built</span></div>
+                </div>
+                <div class="edu-stat-card glass">
+                    <div class="edu-stat-icon"><i class="fas fa-fire"></i></div>
+                    <div><strong>B.Tech</strong><span>In Progress</span></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ══ 07. CONTACT ══ -->
+    <section id="contact" class="contact section">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">07. Contact</span>
+                <h2>Get In <span class="accent">Touch</span></h2>
+                <p class="section-sub">Let's build something amazing together</p>
+            </div>
+            <div class="contact-grid">
+                <div class="contact-info reveal">
+                    <h3>Let's Talk 👋</h3>
+                    <p>I'm currently open to new opportunities, freelance work, and collaborations. Whether you have a
+                        question, a project idea, or just want to say hello — my inbox is always open!</p>
+                    <div class="contact-cards">
+                        <a href="mailto:chetanpawar0780@gmail.com" class="contact-card glass">
+                            <i class="fas fa-envelope"></i>
+                            <div><strong>Email</strong><span>chetanpawar0780@gmail.com</span></div>
+                        </a>
+                        <a href="https://github.com/" target="_blank" class="contact-card glass">
+                            <i class="fab fa-github"></i>
+                            <div><strong>GitHub</strong><span>github.com/chetanpawar</span></div>
+                        </a>
+                        <a href="https://linkedin.com/" target="_blank" class="contact-card glass">
+                            <i class="fab fa-linkedin"></i>
+                            <div><strong>LinkedIn</strong><span>linkedin.com/in/chetanpawar</span></div>
+                        </a>
+                        <div class="contact-card glass">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <div><strong>Location</strong><span>Malegaon, Maharashtra, India</span></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="contact-form-wrap reveal">
+                    <form id="contactForm" class="contact-form glass" novalidate>
+                        <div class="form-group">
+                            <label for="name">Your Name</label>
+                            <input type="text" id="name" name="name" placeholder="Chetan Pawar" required />
+                            <span class="form-error" id="nameError"></span>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email Address</label>
+                            <input type="email" id="email" name="email" placeholder="you@example.com" required />
+                            <span class="form-error" id="emailError"></span>
+                        </div>
+                        <div class="form-group">
+                            <label for="subject">Subject</label>
+                            <input type="text" id="subject" name="subject" placeholder="Project Inquiry" />
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Message</label>
+                            <textarea id="message" name="message" rows="5" placeholder="Tell me about your project..."
+                                required></textarea>
+                            <span class="form-error" id="messageError"></span>
+                        </div>
+                        <button type="submit" class="btn-primary full-width" id="submitBtn">
+                            <span id="btnText">Send Message <i class="fas fa-paper-plane"></i></span>
+                        </button>
+                        <div id="formSuccess" class="form-success" style="display:none">
+                            <i class="fas fa-check-circle"></i> Message sent! I'll get back to you soon.
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ══ FOOTER ══ -->
+    <footer>
+        <div class="container">
+            <div class="footer-inner">
+                <div class="footer-logo">CH<span>.</span></div>
+                <p class="footer-copy">© 2026 <strong>Chetan Pawar</strong>. All rights reserved. Built with ❤️ in
+                    India.</p>
+                <div class="footer-socials">
+                    <a href="https://github.com/" target="_blank"><i class="fab fa-github"></i></a>
+                    <a href="https://linkedin.com/" target="_blank"><i class="fab fa-linkedin"></i></a>
+                    <a href="https://twitter.com/" target="_blank"><i class="fab fa-twitter"></i></a>
+                    <a href="mailto:chetanpawar0780@gmail.com"><i class="fas fa-envelope"></i></a>
+                </div>
+            </div>
+            <p class="footer-bottom">Designed & Developed by Chetan Pawar</p>
+        </div>
+    </footer>
+
+    <button id="scrollTop" aria-label="Scroll to top"><i class="fas fa-arrow-up"></i></button>
+
+    <!-- Three.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="script.js"></script>
+
+</body>
+
+</html>
