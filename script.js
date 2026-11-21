@@ -230,12 +230,17 @@
 
     document.addEventListener('mousedown', () => { isClicking = true; });
     document.addEventListener('mouseup', () => { isClicking = false; });
+    document.documentElement.addEventListener('mouseleave', () => { isVisible = false; });
+    document.documentElement.addEventListener('mouseenter', () => { isVisible = false; });
 
-    // Hide default cursor on entire page
-    document.documentElement.style.cursor = 'none';
-    const noCursorStyle = document.createElement('style');
-    noCursorStyle.textContent = '*, *::before, *::after { cursor: none !important; }';
-    document.head.appendChild(noCursorStyle);
+    // Hide the native cursor only on fine-pointer devices after the canvas is ready
+    const finePointer = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+    if (finePointer) {
+        document.documentElement.classList.add('custom-cursor-ready');
+    } else {
+        canvas.style.display = 'none';
+        return;
+    }
 
     // Hover detection
     const HOVER_SEL = 'a, button, input, textarea, select, label, .project-card, .interest-card, .tech-icon-card, .contact-card, .skill-bar-item, .timeline-card, #scrollTop, [role="button"]';

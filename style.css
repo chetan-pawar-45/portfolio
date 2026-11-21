@@ -28,7 +28,6 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    cursor: none !important;
 }
 
 html {
@@ -77,7 +76,27 @@ ul {
     pointer-events: none;
     z-index: 2147483647;
     /* max z-index */
+    display: none;
+}
+
+.custom-cursor-ready,
+.custom-cursor-ready * {
+    cursor: none !important;
+}
+
+.custom-cursor-ready #cursorCanvas {
     display: block;
+}
+
+@media (hover: none), (pointer: coarse) {
+    .custom-cursor-ready,
+    .custom-cursor-ready * {
+        cursor: auto !important;
+    }
+
+    #cursorCanvas {
+        display: none !important;
+    }
 }
 
 /* ── TYPOGRAPHY ────────────────────────── */
